@@ -42,15 +42,27 @@
                     fy += (F * dy)
                 }
             }
-            a.x += fx
-            a.y += fy
+            a.vx = (a.vx + fx)*0.5;
+            a.vy = (a.vy + fy)*0.5;
+            a.x += a.vx;
+            a.y += a.vy;
+            if (a.x <= 0 || a.x >= 500) { a.vx *= -1; }
+            if (a.y <= 0 || a.y >= 500) { a.vy *= -1; }
         }
     }
     
-    yellow = create(2, "yellow")
+    yellow = create(30, "yellow")
+    red = create(200, "red");
+    green = create(200, "green");
     
     update=()=>{
-        rule(yellow, yellow, -1)
+        rule(green, green, -0.32);
+        rule(green, red, -0.17);
+        rule(green, yellow, 0.34);
+        rule(red, red, -0.1);
+        rule(red, green, -0.34);
+        rule(yellow, yellow, 0.15);
+        rule(yellow, green, -0.2);
         m.clearRect(0, 0, 500, 500)
         draw(0, 0, "black", 500)
         for(i=0; i<particles.length; i++){
