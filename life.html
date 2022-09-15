@@ -42,8 +42,8 @@
                     fy += F * dy;
                 }
             }
-            a.vx = (a.vx + fx)*0.5;
-            a.vy = (a.vy + fy)*0.5;
+            a.vx = (a.vx + fx)*0.4;
+            a.vy = (a.vy + fy)*0.4;
             a.x += a.vx;
             a.y += a.vy;
             if (a.x <= 0 || a.x >= 500) { a.vx *= -1; }
@@ -51,11 +51,20 @@
         }
     };
     
-    yellow = create(200, "yellow")
+    
+    blue = create(500, "blue");
+    purple = create(500, "purple");
+    yellow = create(200, "yellow");
     red = create(200, "red");
     green = create(200, "green");
     
     update=()=>{
+        rule(blue, blue, -0.32);
+        rule(blue, red, 0.17);
+        rule(blue, yellow, -0.34);
+        rule(purple, purple, -0.32);
+        rule(purple, red, 0.17);
+        rule(purple, yellow, -0.34);
         rule(green, green, -0.32);
         rule(green, red, -0.17);
         rule(green, yellow, 0.34);
@@ -66,9 +75,9 @@
         m.clearRect(0, 0, 500, 500)
         draw(0, 0, "black", 500)
         for(i=0; i<particles.length; i++){
-            draw(particles[i].x, particles[i].y, particles[i].color, 5)
+            draw(particles[i].x, particles[i].y, particles[i].color, 2);
         }
-        requestAnimationFrame(update)
+        requestAnimationFrame(update);
     }
     
     update();
